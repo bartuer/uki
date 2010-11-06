@@ -13,10 +13,10 @@ include('dom.js');
  *
  * @returns {Element}
  */
-uki.image = function(url, dataUrl, alphaUrl) {
-    var result = new Image();
-    result.src = uki.imageSrc(url, dataUrl, alphaUrl);
-    return result;
+uki.image = function (url, dataUrl, alphaUrl) {
+  var result = new Image();
+  result.src = uki.imageSrc(url, dataUrl, alphaUrl);
+  return result;
 };
 
 /**
@@ -28,10 +28,14 @@ uki.image = function(url, dataUrl, alphaUrl) {
  *
  * @returns {string}
  */
-uki.imageSrc = function(url, dataUrl, alphaUrl) {
-    if (uki.image.dataUrlSupported && dataUrl) return dataUrl;
-    if (alphaUrl && uki.image.needAlphaFix) return alphaUrl;
-    return url;
+uki.imageSrc = function (url, dataUrl, alphaUrl) {
+  if (uki.image.dataUrlSupported && dataUrl) {
+    return dataUrl;
+  }
+  if (alphaUrl && uki.image.needAlphaFix) {
+    return alphaUrl;
+  }
+  return url;
 };
 
 /**
@@ -44,13 +48,13 @@ uki.imageSrc = function(url, dataUrl, alphaUrl) {
  *
  * @returns {string} html
  */
-uki.imageHTML = function(url, dataUrl, alphaUrl, html) {
-    if (uki.image.needAlphaFix && alphaUrl) {
-        url = alphaUrl;
-    } else if (uki.image.dataUrlSupported) {
-        url = dataUrl;
-    }
-    return '<img' + (html || '') + ' src="' + url + '" />';
+uki.imageHTML = function (url, dataUrl, alphaUrl, html) {
+  if (uki.image.needAlphaFix && alphaUrl) {
+    url = alphaUrl;
+  } else if (uki.image.dataUrlSupported) {
+    url = dataUrl;
+  }
+  return '<img' + (html || '') + ' src="' + url + '" />';
 };
 
 /**
@@ -60,15 +64,15 @@ uki.imageHTML = function(url, dataUrl, alphaUrl, html) {
  * @param {function()} callback
  */
 // uki.image.load = function(images, callback) {
-//     
+//
 //     var imagesToLoad = images.length;
 //     for(var img, i=0, l = images.length; i < l; i++) {
-//      
+//
 //         if ( !(img = images[i]) || img.width ) {
 //             if (!--imagesToLoad) callback();
 //             return;
 //         }
-// 
+//
 //         var handler = function() {
 //                 img.onload = img.onerror = img.onabort = null; // prevent memory leaks
 //                 if (!--imagesToLoad) callback();
@@ -78,7 +82,6 @@ uki.imageHTML = function(url, dataUrl, alphaUrl, html) {
 //      img.onabort = handler;
 //     };
 // };
-
 /**
  * @type boolean
  */
@@ -88,4 +91,6 @@ uki.image.dataUrlSupported = doc.createElement('canvas').toDataURL || (/MSIE (8)
  * @type boolean
  */
 uki.image.needAlphaFix = /MSIE 6/.test(ua);
-if(uki.image.needAlphaFix) doc.execCommand("BackgroundImageCache", false, true);
+if (uki.image.needAlphaFix) {
+  doc.execCommand("BackgroundImageCache", false, true);
+}
