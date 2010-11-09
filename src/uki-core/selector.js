@@ -57,7 +57,9 @@ include('collection.js');
         return true;
       }
       var typeName = attr(comp, 'typeName');
-      return typeName && typeName.length >= expected.length && ('.' + typeName).indexOf('.' + expected) === (typeName.length - expected.length);
+      return typeName &&
+             typeName.length >= expected.length &&
+             ('.' + typeName).indexOf('.' + expected) === (typeName.length - expected.length);
     },
 
     ATTR: function (comp, match) {
@@ -66,7 +68,16 @@ include('collection.js');
         type = match[2],
         check = match[4];
 
-      return result === null ? type === "!=" : type === "=" ? value === check : type === "*=" ? value.indexOf(check) >= 0 : type === "~=" ? (" " + value + " ").indexOf(check) >= 0 : !check ? value && result !== false : type === "!=" ? value !== check : type === "^=" ? value.indexOf(check) === 0 : type === "$=" ? value.substr(value.length - check.length) === check : false;
+        return result === null ? type === "!=" :
+               type === "="    ? value === check :
+               type === "*="   ? value.indexOf(check) >= 0 :
+               type === "~="   ? (" " + value + " ").indexOf(check) >= 0 :
+               !check          ? value && result !== false :
+               type === "!="   ? value !== check :
+               type === "^="   ? value.indexOf(check) === 0 :
+               type === "$="   ? value.substr(value.length - check.length) === check :
+               false;
+
     },
 
     ID: function (comp, match) {
@@ -150,6 +161,7 @@ include('collection.js');
 
       while (expr.length > 0) {
         mapper = mappers[expr[0]] ? mappers[expr.shift()] : mappers[''];
+
         result = mapper(result);
         if (expr.length === 0) {
           break;
@@ -166,6 +178,7 @@ include('collection.js');
 
     /** @ignore */
     reduce: function (exprItem, context) {
+
       if (!context || !context.length) {
         return [];
       }
