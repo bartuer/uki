@@ -40,8 +40,7 @@ include('event.js');
 
   var dataTransferProps = ['dropEffect', 'effectAllowed', 'types', 'files'];
 
-  uki.dom.DataTransferWrapper = uki.newClass(new
-  function () {
+  uki.dom.DataTransferWrapper = uki.newClass(new function () {
     this.init = function (dataTransfer) {
       this.dataTransfer = dataTransfer;
       for (var i = dataTransferProps.length - 1; i >= 0; i -= 1) {

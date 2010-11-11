@@ -12,8 +12,7 @@ uki.dom.Event = function (domEvent) {
   // this.dataTransfer = new uki.dom.DataTransfer(domEvent);
 };
 
-uki.dom.Event.prototype = new
-function () {
+uki.dom.Event.prototype = new function () {
   function returnTrue() {
     return true;
   }
