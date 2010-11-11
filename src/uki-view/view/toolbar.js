@@ -145,8 +145,7 @@ uki.view.declare('uki.view.Toolbar', uki.view.Container, function (Base) {
       align: 'left',
       anchors: 'left top',
       backgroundPrefix: 'toolbar-button-',
-      autosizeToContents: 'width',
-      focusable: false
+      autosizeToContents: 'width'
     }, descr);
   };
 });
