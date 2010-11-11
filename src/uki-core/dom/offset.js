@@ -5,8 +5,12 @@ include('../dom.js');
 
   if (doc.documentElement["getBoundingClientRect"]) {
     self = uki.dom.offset = function (elem) {
-      if (!elem || elem === root) return new Point();
-      if (elem === elem.ownerDocument.body) return self.bodyOffset(elem);
+      if (!elem || elem === root) {
+        return new Point();
+      }
+      if (elem === elem.ownerDocument.body) {
+        return self.bodyOffset(elem);
+      }
       self.boxModel === undefined && self.initializeBoxModel();
       var box = elem.getBoundingClientRect(),
         doc = elem.ownerDocument,
@@ -21,8 +25,12 @@ include('../dom.js');
     };
   } else {
     self = uki.dom.offset = function (elem) {
-      if (!elem || elem === root) return new Point();
-      if (elem === elem.ownerDocument.body) return self.bodyOffset(elem);
+      if (!elem || elem === root) {
+        return new Point();
+      }
+      if (elem === elem.ownerDocument.body) {
+        return self.bodyOffset(elem);
+      }
       self.initialized || self.initialize();
 
       var offsetParent = elem.offsetParent,
@@ -74,7 +82,9 @@ include('../dom.js');
 
   uki.extend(self, {
     initialize: function () {
-      if (this.initialized) return;
+      if (this.initialized) {
+        return;
+      }
       var body = doc.body,
         container = doc.createElement('div'),
         innerDiv, checkDiv, table, td, rules, prop, bodyMarginTop = body.style.marginTop,
@@ -90,7 +100,9 @@ include('../dom.js');
         height: '1px',
         visibility: 'hidden'
       };
-      for (prop in rules) container.style[prop] = rules[prop];
+      for (prop in rules) {
+        container.style[prop] = rules[prop];
+      }
 
       container.innerHTML = html;
       body.insertBefore(container, body.firstChild);
@@ -115,7 +127,9 @@ include('../dom.js');
     },
 
     initializeBoxModel: function () {
-      if (this.boxModel !== undefined) return;
+      if (this.boxModel !== undefined) {
+        return;
+      }
       var div = doc.createElement("div");
       div.style.width = div.style.paddingLeft = "1px";
 
